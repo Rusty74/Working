@@ -5,8 +5,8 @@ using namespace std;
 //structure declarations
 struct polar
 {
-   double distance; //distance from origin
-   double angle; //direction from origin
+   double distance;     //distance from origin
+   double angle;    //direction from origin
 };
 
 struct rect
@@ -17,112 +17,111 @@ struct rect
 
 //prototypes
 
-polar rect_to_polar(rect xypos);
+void rect_to_polar(const rect * pxy, polar * pda);
 
-void show_polar(polar dapos);
+void show_polar (const polar * pda);
 
-rect polar_to_rect(polar dapos);
+void polar_to_rect(const polar * pda);
 
-void show_rect(rect xypos);
+void show_rect(const rect * pxy, polar * pda);
 
 
 int main()
 {
-   rect rplace;
-   polar pplace;
-   char choice;
-   int quit;
+	rect rplace;
+	polar pplace;
+	char choice;
+	int quit;
 
-   while (quit != 1)
-   {
-cout << "\nEnter P (Polar to rectangular), R (Rectangular to polar), or Q (Quit): ";
-cin >> choice;
+	while (quit != 1)
+	{
+		cout << "\nEnter P (Polar to rectangular), R (Rectangular to polar), or Q (Quit): ";
+		cin >> choice;
 
-if (choice == 'p' || choice == 'P')
-{
-cout << "Enter the distance and angle values: ";
+		if (choice == 'p' || choice == 'P')
+		{
+			cout << "Enter the distance and angle values: ";
 
-cin >> pplace.distance >> pplace.angle;
-{
-rplace = polar_to_rect(pplace);
-show_rect(rplace);
-}
-}
+			cin >> pplace.distance >> pplace.angle;
+			{
+				polar_to_rect(&pplace);
+				show_rect(&rplace, &pplace);
 
-else if (choice == 'r' || choice == 'R')
-{
-cout << "Enter the x and y values: ";
+			}
+		}
+		else if (choice == 'r' || choice == 'R')
+		{
+			cout << "Enter the x and y values: ";
 
-while (cin >> rplace.x >> rplace.y)
-{
-pplace = rect_to_polar(rplace);
-show_polar(pplace);
-}
-}
+			while (cin >> rplace.x >> rplace.y)
+			{
+				rect_to_polar(&rplace, &pplace);    // pass addresses
+				show_polar(&pplace);                   // pass address
+			}
+		}
 
-else if (choice == 'Q' || choice == 'q')
-{
-cout << "Done!"<<endl;
-quit=1;
-}
 
-else
-{
-cout << "Invalid Entry!"<<endl;
-}
-   }
+
+		else if (choice == 'Q' || choice == 'q')
+		{
+			cout << "Done!"<<endl;
+			quit=1;
+		}
+
+
+
+		else
+		{
+				   cout << "Invalid Entry!"<<endl;
+		}
+	}
 
 return 0;
 }
 
 //Convert Polar to Rectangular Coordinates
 
-rect polar_to_rect(polar dapos)
+void polar_to_rect(const polar * pda, rect * pxy)
 {
-   rect answer;
    const double Rad_to_deg = 0.01745329252;
-   answer.x = dapos.distance * cos(dapos.angle * Rad_to_deg);
-   answer.y = dapos.distance * sin(dapos.angle * Rad_to_deg);
+   pxy->x = pda->distance * cos(pda->angle * Rad_to_deg);
+   pxy->y = pda->distance * sin(pda->angle * Rad_to_deg);
 
    //Fix coordinates for angles 0, 90, 270, 180 degrees
-   if (dapos.angle == 90||dapos.angle == 270)
+   if (pda->angle == 90||pda->distance == 270)
    {
-       answer.x = 0;
+       pxy->x = 0;
+   }
+   if (pda->angle == 0||pda->distance == 180)
+   {
+       pxy->y = 0;
    }
 
-   if (dapos.angle == 0||dapos.angle==180)
-   {
-       answer.y = 0;
-   }
 
-
-return answer; // Display Cartesian Coordinates
+return; // Display Cartesian Coordinates
 }
 
 //Show Rectangular Coordinates
 
-void show_rect(rect xypos)
+void show_rect(const rect * pxy,  polar * pda)
 {
-cout << "x = " << xypos.x << ", y = " << xypos.y;
+cout << "x = " << pxy->x << ", y = " << pxy->y;
 }
 
-polar rect_to_polar(rect xypos)
+
+
+void rect_to_polar(const rect * pxy,  polar * pda)
 {
-   polar answer;
-
-   answer.distance = sqrt( xypos.x * xypos.x + xypos.y *xypos.y);
-   answer.angle = atan2(xypos.y,xypos.x);
-
-return answer; // returns a polar structure
-}
+	pda->distance = sqrt( (pxy->x) * (pxy->x) + (pxy->y) * (pxy->y));
+    pda->angle = atan2(pxy->y,  pxy->x); }
 
 // show polar coordinates, converting angle to degrees
-void show_polar (polar dapos)
-{
-const double Rad_to_deg = 57.29577951;
 
-cout << "distance = " << dapos.distance;
-cout << ", angle = " << dapos.angle * Rad_to_deg;
-cout << " degrees\n";
+void show_polar (const polar * pda)
+{
+	const double Rad_to_deg = 57.29577951;
+    cout << "distance = " << pda->distance;
+    cout << ", angle = " << pda->angle * Rad_to_deg;
+    cout << " degrees\n";
 }
 
