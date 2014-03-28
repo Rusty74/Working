@@ -17,13 +17,13 @@ struct rect
 
 //prototypes
 
-polar rect_to_polar(rect xypos);
+polar rect_to_polar(rect &xypos);
 
-void show_polar(polar dapos);
+void show_polar(polar &dapos);
 
-rect polar_to_rect(polar dapos);
+rect polar_to_rect(polar &dapos);
 
-void show_rect(rect xypos);
+void show_rect(rect &xypos);
 
 
 int main()
@@ -77,7 +77,7 @@ return 0;
 
 //Convert Polar to Rectangular Coordinates
 
-rect polar_to_rect(polar dapos)
+rect polar_to_rect(polar &dapos)
 {
    rect answer;
    const double Rad_to_deg = 0.01745329252;
@@ -101,12 +101,12 @@ return answer; // Display Cartesian Coordinates
 
 //Show Rectangular Coordinates
 
-void show_rect(rect xypos)
+void show_rect(rect &xypos)
 {
 cout << "x = " << xypos.x << ", y = " << xypos.y;
 }
 
-polar rect_to_polar(rect xypos)
+polar rect_to_polar(rect &xypos)
 {
    polar answer;
 
@@ -117,7 +117,7 @@ return answer; // returns a polar structure
 }
 
 // show polar coordinates, converting angle to degrees
-void show_polar (polar dapos)
+void show_polar (polar &dapos)
 {
 const double Rad_to_deg = 57.29577951;
 
@@ -125,4 +125,5 @@ cout << "distance = " << dapos.distance;
 cout << ", angle = " << dapos.angle * Rad_to_deg;
 cout << " degrees\n";
 }
+
 
