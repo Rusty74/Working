@@ -3,46 +3,52 @@
 #include "coordinates.h"
 //Convert Polar to Rectangular Coordinates
 
-void polar_to_rect(const polar * pda, rect * pxy)
+rect polar_to_rect(polar &dapos)
 {
+   rect answer;
    const double Rad_to_deg = 0.01745329252;
-   pxy->x = pda->distance * cos(pda->angle * Rad_to_deg);
-   pxy->y = pda->distance * sin(pda->angle * Rad_to_deg);
+   answer.x = dapos.distance * cos(dapos.angle * Rad_to_deg);
+   answer.y = dapos.distance * sin(dapos.angle * Rad_to_deg);
 
    //Fix coordinates for angles 0, 90, 270, 180 degrees
-   if (pda->angle == 90||pda->distance == 270)
+   if (dapos.angle == 90||dapos.angle == 270)
    {
-       pxy->x = 0;
+       answer.x = 0;
    }
-   if (pda->angle == 0||pda->distance == 180)
+
+   if (dapos.angle == 0||dapos.angle==180)
    {
-       pxy->y = 0;
+       answer.y = 0;
    }
 
 
-return; // Display Cartesian Coordinates
+return answer; // Display Cartesian Coordinates
 }
 
 //Show Rectangular Coordinates
 
-void show_rect(const rect * pxy,  polar * pda)
+void show_rect(rect &xypos)
 {
-cout << "x = " << pxy->x << ", y = " << pxy->y;
+cout << "x = " << xypos.x << ", y = " << xypos.y;
 }
 
-
-
-void rect_to_polar(const rect * pxy,  polar * pda)
+polar rect_to_polar(rect &xypos)
 {
-	pda->distance = sqrt( (pxy->x) * (pxy->x) + (pxy->y) * (pxy->y));
-    pda->angle = atan2(pxy->y,  pxy->x); }
+   polar answer;
+
+   answer.distance = sqrt( xypos.x * xypos.x + xypos.y *xypos.y);
+   answer.angle = atan2(xypos.y,xypos.x);
+
+return answer; // returns a polar structure
+}
 
 // show polar coordinates, converting angle to degrees
-
-void show_polar (const polar * pda)
+void show_polar (polar &dapos)
 {
-	const double Rad_to_deg = 57.29577951;
-    cout << "distance = " << pda->distance;
-    cout << ", angle = " << pda->angle * Rad_to_deg;
-    cout << " degrees\n";
+const double Rad_to_deg = 57.29577951;
+
+cout << "distance = " << dapos.distance;
+cout << ", angle = " << dapos.angle * Rad_to_deg;
+cout << " degrees\n";
 }
+

@@ -3,8 +3,8 @@ using namespace std;
 //structure declarations
 struct polar
 {
-   double distance;     //distance from origin
-   double angle;    //direction from origin
+   double distance; //distance from origin
+   double angle; //direction from origin
 };
 
 struct rect
@@ -15,10 +15,10 @@ struct rect
 
 //prototypes
 
-void rect_to_polar(const rect * pxy, polar * pda);
+polar rect_to_polar(rect &xypos);
 
-void show_polar (const polar * pda);
+void show_polar(polar &dapos);
 
-void polar_to_rect(const polar * pda);
+rect polar_to_rect(polar &dapos);
 
-void show_rect(const rect * pxy, polar * pda);
+void show_rect(rect &xypos);
