@@ -1,4 +1,5 @@
  // left.cpp -- string function with a default argument
+// Hitch's Edit
 #include <iostream>
 const int ArSize = 80;
 
