@@ -1,21 +1,29 @@
 // leftover.cpp -- overloading the left() function
 #include <iostream>
 
+const int ArSize=80;
 long left(long num, int ct);
 char * left(const char * str, int n = 1);
 
 int main()
 {
 	using namespace std;
-	char * trip = "Hawaii!!!"; // test value
-	long n = 123456789; // test value
+
+    char str[ArSize];
+    cout<<"Enter a string:\n";
+    cin.getline(str, ArSize);
+
+    long num;
+    cout<<"Enter an integer:\n";
+	cin>>num;
+    
 	int i;
 	char * temp;
 
 	for (i = 1; i < 10; i++)
 	{
-		cout << left(n, i) << endl;
-		temp = left(trip,i);
+		cout << left(num, i) << endl;
+		temp = left(str,i);
 		cout << temp << endl;
 		delete [] temp; // point to temporary storage
 		}
