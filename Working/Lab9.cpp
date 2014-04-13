@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-
 template <typename Any>
 void Show(Any a[],int n);
 
